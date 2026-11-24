@@ -54,7 +54,7 @@ function undoConsumption(consumptionId) {
     const record = state.consumptions.find(c => c.id === consumptionId && !c.reversed)
     if (!record) return { error: '记录不存在或已撤销' }
     const hasLater = state.consumptions.some(c => c.ingredientId === record.ingredientId && !c.reversed && c.consumedAt > record.consumedAt)
-    if (hasLater) return { error: '请先撤销较新的使用记录' }
+    if (hasLater) return { error: '请先撤销较新的食用记录' }
     const item = state.ingredients.find(i => i.id === record.ingredientId)
     if (!item) return { error: '食材不存在' }
     item.remainingQuantity = Math.min(item.quantity, Number(item.remainingQuantity) + record.quantity)

@@ -1,1 +1,1 @@
-{ "navigationBarTitleText": "冰箱墨水屏" }
+{ "navigationBarTitleText": "冰箱墨水屏", "usingComponents": { "lingling-character": "/components/lingling-character/lingling-character" } }

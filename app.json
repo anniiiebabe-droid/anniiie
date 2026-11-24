@@ -11,7 +11,8 @@
     "pages/collection/collection",
     "pages/achievements/achievements",
     "pages/weekly-report/weekly-report",
-    "pages/device-demo/device-demo"
+    "pages/device-demo/device-demo",
+    "pages/recipe-detail/recipe-detail"
   ],
   "window": {
     "navigationBarTitleText": "先吃 FIRST BITE",
@@ -21,6 +22,7 @@
     "backgroundTextStyle": "light"
   },
   "tabBar": {
+    "custom": true,
     "color": "#827C70",
     "selectedColor": "#61785F",
     "backgroundColor": "#FFFCF5",

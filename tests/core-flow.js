@@ -13,8 +13,12 @@ const ingredients = require('../services/ingredient-service')
 const outfits = require('../services/outfit-service')
 const report = require('../services/report-service')
 const { formatDate } = require('../utils/date')
+const foodKnowledge = require('../services/food-knowledge-service')
 
 dm.reset()
+const appleEstimate = foodKnowledge.estimate('苹果', formatDate(new Date()), '冷藏室')
+assert.strictEqual(appleEstimate.category, '水果', '苹果应自动分类为水果')
+assert.strictEqual(appleEstimate.shelfLifeDays, 21, '冷藏苹果应给出知识库保鲜参考')
 const onion = ingredients.add({
   name: '洋葱', quantity: 1, unit: '个', category: '蔬菜',
   priorityUseDate: formatDate(new Date()), purchaseDate: formatDate(new Date()),
@@ -23,7 +27,7 @@ const onion = ingredients.add({
 
 assert.strictEqual(ingredients.today(3)[0].id, onion.id, '洋葱应进入今日优先')
 const completed = ingredients.consume(onion.id, 1)
-assert.ok(completed.reward, '完成使用应发放奖励')
+assert.ok(completed.reward, '完成食用应发放奖励')
 assert.strictEqual(dm.getState().lingling.xp, 10)
 assert.strictEqual(dm.getState().lingling.points, 5)
 assert.strictEqual(dm.getState().lingling.nutrients.purple, 1)

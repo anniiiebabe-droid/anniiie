@@ -1,13 +1,14 @@
 const service = require('../../services/ingredient-service')
+const knowledge = require('../../services/food-knowledge-service')
 const { formatDate } = require('../../utils/date')
+
 Page({
-  data:{ id:'', form:{name:'',quantity:'',unit:'个',priorityUseDate:'',purchaseDate:'',category:'蔬菜',storageLocation:'冷藏室',note:''}, units:['个','颗','根','盒','袋','克','千克','毫升'], categories:['蔬菜','水果','肉类','蛋奶','豆制品','其他'], locations:['冷藏室','冷冻室','常温','其他'], today:formatDate(new Date()), isEdit:false },
-  onLoad(q){ if(q.id){const item=service.get(q.id); if(item)this.setData({id:q.id,form:item,isEdit:true})} },
-  input(e){this.setData({['form.'+e.currentTarget.dataset.key]:e.detail.value})},
-  pick(e){const key=e.currentTarget.dataset.key, values=this.data[key==='unit'?'units':key==='category'?'categories':'locations'];this.setData({['form.'+key]:values[e.detail.value]})},
-  date(e){this.setData({['form.'+e.currentTarget.dataset.key]:e.detail.value})},
-  save(){const f=this.data.form;if(!f.name.trim()||!Number(f.quantity)||!f.unit||!f.priorityUseDate){wx.showToast({title:'请填写所有必填项',icon:'none'});return} if(Number(f.quantity)<=0){wx.showToast({title:'数量需大于 0',icon:'none'});return}
-    if(this.data.isEdit)service.update(this.data.id,f);else service.add(f)
-    wx.showToast({title:this.data.isEdit?'保存成功':'添加成功',icon:'success'});setTimeout(()=>wx.navigateBack(),500)
-  }
+  data:{ id:'', isEdit:false, recognizing:false, autoMatched:false, form:{name:'',quantity:'',unit:'个',priorityUseDate:'',purchaseDate:'',category:'其他',storageLocation:'冷藏室',note:'',shelfLifeDays:3,estimateSource:'通用保鲜参考'}, units:['个','颗','根','把','盒','袋','克','千克','毫升'], locations:['冷藏室','冷冻室','常温','其他'], today:formatDate(new Date()) },
+  onLoad(q){ if(q.id){const item=service.get(q.id);if(item)this.setData({id:q.id,form:item,isEdit:true},()=>this.recalculate(false))} else this.setData({'form.purchaseDate':this.data.today},()=>this.recalculate(false)) },
+  input(e){const key=e.currentTarget.dataset.key;this.setData({['form.'+key]:e.detail.value});if(key==='name')this.recalculate(true)},
+  pick(e){const key=e.currentTarget.dataset.key, values=key==='unit'?this.data.units:this.data.locations;this.setData({['form.'+key]:values[e.detail.value]},()=>{if(key==='storageLocation')this.recalculate(false)})},
+  date(e){this.setData({['form.'+e.currentTarget.dataset.key]:e.detail.value},()=>this.recalculate(false))},
+  recalculate(fillUnit){const f=this.data.form,result=knowledge.estimate(f.name,f.purchaseDate||this.data.today,f.storageLocation);const next={'form.category':result.category,'form.priorityUseDate':result.suggestedEatDate,'form.shelfLifeDays':result.shelfLifeDays,'form.estimateSource':result.source,autoMatched:!!result.food};if(fillUnit&&result.food)next['form.unit']=result.unit;this.setData(next)},
+  recognize(){wx.chooseMedia({count:1,mediaType:['image'],sourceType:['camera','album'],success:()=>{this.setData({recognizing:true});setTimeout(()=>{this.setData({recognizing:false});wx.showActionSheet({itemList:['苹果 · 96%','洋葱 · 93%','番茄 · 91%'],success:r=>{const names=['苹果','洋葱','番茄'];this.setData({'form.name':names[r.tapIndex]},()=>this.recalculate(true));wx.showToast({title:'已自动填写',icon:'success'})}})},900)}})},
+  save(){const f=this.data.form;this.recalculate(false);if(!f.name.trim()||!Number(f.quantity)||!f.unit||!f.purchaseDate){wx.showToast({title:'请填写名称、数量和购买日期',icon:'none'});return}if(Number(f.quantity)<=0){wx.showToast({title:'数量需大于 0',icon:'none'});return}const finalForm=Object.assign({},this.data.form);if(this.data.isEdit)service.update(this.data.id,finalForm);else service.add(finalForm);wx.showToast({title:this.data.isEdit?'保存成功':'已智能入库',icon:'success'});setTimeout(()=>wx.navigateBack(),500)}
 })

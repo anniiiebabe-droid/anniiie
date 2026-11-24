@@ -3,7 +3,7 @@
 .character.large { width: 410rpx; height: 400rpx; }
 .character.garden { background: radial-gradient(circle at 20% 75%, #f3d779 0 8rpx, transparent 9rpx), radial-gradient(circle at 80% 70%, #efb1ad 0 8rpx, transparent 9rpx), #dfeadb; }
 .mascot-shadow { position: absolute; bottom: 2rpx; width: 250rpx; height: 31rpx; border-radius: 50%; background: rgba(75,66,58,.11); }
-.body { position: relative; z-index: 1; width: 278rpx; height: 225rpx; border: 6rpx solid #302d29; border-radius: 54% 38% 22% 18% / 62% 48% 22% 21%; background: #fff9ed; box-shadow: inset -10rpx -8rpx 0 rgba(238,230,216,.45), 0 8rpx 0 rgba(75,70,60,.06); transform: translateX(-3rpx); }
+.body { position: relative; z-index: 1; width: 278rpx; height: 225rpx; border: 6rpx solid #302d29; border-radius: 54% 38% 22% 18% / 62% 48% 22% 21%; background: #fff9ed; box-shadow: inset -10rpx -8rpx 0 rgba(238,230,216,.45), 0 8rpx 0 rgba(75,70,60,.06); transform: translateX(-3rpx); animation: breathe 3.2s ease-in-out infinite; transform-origin:50% 100%; }
 .hat { position: absolute; z-index: 3; left: 50%; transform: translateX(-50%); }
 .onion { top: -61rpx; width: 158rpx; height: 88rpx; background: linear-gradient(90deg,#c98bc7 0%,#dda6d5 28%,#b976b8 55%,#d59aca 78%,#ae6cad 100%); border: 6rpx solid #302d29; border-radius: 50% 50% 35% 35% / 70% 70% 42% 42%; box-shadow: inset 0 -9rpx 0 rgba(105,57,109,.12); overflow: visible; }
 .onion:before, .onion:after { content: ''; position: absolute; bottom: -8rpx; width: 61rpx; height: 32rpx; background: inherit; border-bottom: 6rpx solid #302d29; border-radius: 50%; }
@@ -24,3 +24,7 @@
 .a-left { left:70rpx; transform:rotate(18deg); border-left-color:transparent; } .a-right { right:52rpx; transform:rotate(-18deg); border-right-color:transparent; }
 .scarf { position:absolute; z-index:6; bottom:28rpx; left:43rpx; width:190rpx; height:40rpx; background:#dc7f67; color:#f4b59f; text-align:center; border:5rpx solid #302d29; border-radius:20rpx; font-size:30rpx; line-height:34rpx; }
 .spark { display:none; position:absolute; color:#e6be50; z-index:5; } .garden .spark { display:block; } .s1 { left:20rpx; top:80rpx; } .s2 { right:20rpx; top:110rpx; }
+@keyframes breathe{0%,100%{transform:translateX(-3rpx) scale(1)}50%{transform:translateX(-3rpx) scale(1.025,.975)}}
+@keyframes blink{0%,44%,50%,100%{transform:scaleY(1)}47%{transform:scaleY(.12)}}
+@keyframes cheer{0%,100%{transform:translateX(-3rpx) translateY(0) rotate(0)}40%{transform:translateX(-3rpx) translateY(-18rpx) rotate(-3deg)}70%{transform:translateX(-3rpx) translateY(-7rpx) rotate(3deg)}}
+.eye{animation:blink 4.5s infinite}.mood-happy .body{animation:cheer 1.2s ease-in-out infinite}.mood-worried .mouth{width:25rpx;height:14rpx;border:5rpx solid #302d29;border-bottom:0;border-radius:22rpx 22rpx 0 0;background:transparent}.mood-sad .body{animation:breathe 4s ease-in-out infinite;filter:saturate(.8)}.mood-sad .mouth{width:27rpx;height:13rpx;border:5rpx solid #302d29;border-bottom:0;border-radius:22rpx 22rpx 0 0;background:transparent}

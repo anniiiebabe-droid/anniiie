@@ -1,8 +1,8 @@
-<view class="character {{size}} {{equipped.background === 'garden-bg' ? 'garden' : ''}}" bindtap="tap">
+<view class="character {{size}} mood-{{mood}} {{equipped.background === 'garden-bg' ? 'garden' : ''}}" bindtap="tap">
   <view class="spark s1">✦</view><view class="spark s2">✿</view>
   <view class="mascot-shadow"></view>
   <view class="body">
-    <view wx:if="{{!equipped.hat || equipped.hat === 'onion-hat'}}" class="hat onion"><view class="sprout"></view><view class="onion-line line-left"></view><view class="onion-line line-right"></view></view>
+    <view wx:if="{{equipped.hat === 'onion-hat'}}" class="hat onion"><view class="sprout"></view><view class="onion-line line-left"></view><view class="onion-line line-right"></view></view>
     <view wx:elif="{{equipped.hat === 'tomato-hat'}}" class="hat tomato"><view class="leaf">✦</view></view>
     <view wx:elif="{{equipped.hat === 'lettuce-hat'}}" class="hat emoji-hat">🥬</view>
     <view wx:elif="{{equipped.hat === 'carrot-hat'}}" class="hat emoji-hat">🥕</view>

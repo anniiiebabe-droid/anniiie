@@ -5,11 +5,11 @@ const outfits = require('../data/outfits')
 const KEY = 'state'
 function defaults() {
   return {
-    version: 1,
+    version: 2,
     ingredients: [], consumptions: [], transactions: [], events: [],
-    lingling: { level: 1, xp: 0, points: 0, currentExpression: 'default', equippedOutfits: { hat: 'onion-hat' }, nutrients: {} },
-    userOutfits: outfits.map(o => ({ outfitId: o.id, owned: o.id === 'onion-hat', equipped: o.id === 'onion-hat', acquiredAt: o.id === 'onion-hat' ? Date.now() : null })),
-    preferences: { reminders: true }, createdAt: Date.now()
+    lingling: { level: 1, xp: 0, points: 0, currentExpression: 'default', equippedOutfits: {}, nutrients: {} },
+    userOutfits: outfits.map(o => ({ outfitId: o.id, owned: o.id === 'onion-hat', equipped: false, acquiredAt: o.id === 'onion-hat' ? Date.now() : null })),
+    profile: { nickname: '惜食新朋友', avatarUrl: '' }, preferences: { reminders: true }, createdAt: Date.now()
   }
 }
 function initialize() {

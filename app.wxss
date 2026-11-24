@@ -14,7 +14,7 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
   font-size: 28rpx;
 }
-.page { min-height: 100vh; padding: 28rpx 28rpx 48rpx; box-sizing: border-box; }
+.page { min-height: 100vh; padding: 28rpx 28rpx 150rpx; box-sizing: border-box; }
 .card { background: var(--paper); border-radius: 28rpx; box-shadow: 0 10rpx 28rpx rgba(76, 72, 60, .07); }
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 36rpx 4rpx 20rpx; }
 .section-title { font-size: 34rpx; font-weight: 700; }
