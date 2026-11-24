@@ -1,18 +1,16 @@
 <view class="character {{size}} mood-{{mood}} {{equipped.background === 'garden-bg' ? 'garden' : ''}}" bindtap="tap">
-  <view class="spark s1">✦</view><view class="spark s2">✿</view>
+  <view class="spark spark-left">✦</view>
+  <view class="spark spark-right">♥</view>
   <view class="mascot-shadow"></view>
-  <view class="body">
+  <view class="model-wrap">
+    <image class="base-model" src="/assets/lingling-base-3d.png" mode="aspectFit" />
     <view wx:if="{{equipped.hat === 'onion-hat'}}" class="hat onion"><view class="sprout"></view><view class="onion-line line-left"></view><view class="onion-line line-right"></view></view>
     <view wx:elif="{{equipped.hat === 'tomato-hat'}}" class="hat tomato"><view class="leaf">✦</view></view>
     <view wx:elif="{{equipped.hat === 'lettuce-hat'}}" class="hat emoji-hat">🥬</view>
     <view wx:elif="{{equipped.hat === 'carrot-hat'}}" class="hat emoji-hat">🥕</view>
     <view wx:elif="{{equipped.hat === 'wreath'}}" class="hat emoji-hat">🌼</view>
-    <view class="face">
-      <view class="eye left"></view><view class="eye right"></view>
-      <view class="mouth {{expression === 'happy-face' ? 'happy' : ''}}"></view>
-      <view class="cheek c-left"></view><view class="cheek c-right"></view>
-    </view>
     <view wx:if="{{equipped.clothes === 'scarf'}}" class="scarf">〰</view>
-    <view class="arm a-left"></view><view class="arm a-right"></view>
+    <view wx:if="{{mood === 'worried'}}" class="mood-mark">!</view>
+    <view wx:elif="{{mood === 'sad'}}" class="mood-mark rain">···</view>
   </view>
 </view>

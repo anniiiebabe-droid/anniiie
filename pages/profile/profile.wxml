@@ -1,6 +1,20 @@
-<view class="page"><view class="profile-head"><button class="avatar-button" open-type="chooseAvatar" bindchooseavatar="chooseAvatar"><image wx:if="{{profile.avatarUrl}}" src="{{profile.avatarUrl}}" mode="aspectFill"/><text wx:else>{{avatarInitial}}</text><view class="camera">✎</view></button><view class="profile-copy"><input type="nickname" value="{{profile.nickname}}" placeholder="设置昵称" bindblur="nickname"/><text class="sub">与令令一起，把每一份好好吃完</text></view></view>
-<view class="weekly card" data-url="/pages/weekly-report/weekly-report" bindtap="go"><view class="weekly-top"><text>本周概览</text><text class="link">查看报告 ›</text></view><view class="stat-grid"><view><text class="stat-number">{{report.ingredientsAdded}}</text><text>新增食材</text></view><view><text class="stat-number">{{report.ingredientsConsumed}}</text><text>完成食用</text></view><view><text class="stat-number">{{report.priorityCompleted}}</text><text>优先完成</text></view></view></view>
-<view class="growth card"><view><text class="menu-title">令令成长</text><text class="sub">Lv.{{lingling.level}} {{lingling.stageName}}</text></view><view class="growth-num">{{lingling.xp}} XP</view></view>
-<view class="section-head"><text class="section-title">偏好与设置</text></view><view class="settings card"><view><view><text class="menu-title">每日提醒</text><text class="sub">按建议食用日期提醒优先食材</text></view><switch checked="{{reminders}}" color="#789176" bindchange="toggle" /></view><view bindtap="about"><text class="menu-title">产品说明</text><text class="arrow">›</text></view></view>
-<view class="section-head"><text class="section-title">数据</text></view><view class="settings card"><view class="danger" bindtap="reset"><view><text class="menu-title">重置本地数据</text><text class="sub">清空食材、成长与兑换记录</text></view><text class="arrow">›</text></view></view>
-<text class="footer">FIRST BITE · 珍惜食物，从先吃开始</text></view>
+<view class="page profile-page">
+  <view class="account-card card">
+    <view wx:if="{{!profile.loggedIn}}" class="login-state">
+      <view class="login-visual"><view class="avatar-placeholder">先</view><view><text class="account-title">登录先吃</text><text class="account-sub">同步你的惜食记录与令令成长</text></view></view>
+      <button class="wechat-login" bindtap="wechatLogin"><text class="wechat-mark">微</text><text>微信一键登录</text></button>
+      <text class="privacy-note">登录即代表同意《用户服务与隐私说明》</text>
+    </view>
+    <view wx:else class="profile-state">
+      <button class="avatar-button" open-type="chooseAvatar" bindchooseavatar="chooseAvatar"><image wx:if="{{profile.avatarUrl}}" src="{{profile.avatarUrl}}" mode="aspectFill"/><text wx:else>{{avatarInitial}}</text><view class="camera">＋</view></button>
+      <view class="profile-copy"><view class="name-line"><text class="profile-name">{{profile.nickname}}</text><text class="verified">微信已登录</text></view><text class="account-sub">与令令一起，把每一份好好吃完</text></view>
+      <button class="edit-entry" bindtap="openEditor">编辑</button>
+    </view>
+  </view>
+  <view class="weekly card" data-url="/pages/weekly-report/weekly-report" bindtap="go"><view class="weekly-top"><text>本周概览</text><text class="link">查看报告 ›</text></view><view class="stat-grid"><view><text class="stat-number">{{report.ingredientsAdded}}</text><text>新增食材</text></view><view><text class="stat-number">{{report.ingredientsConsumed}}</text><text>完成食用</text></view><view><text class="stat-number">{{report.priorityCompleted}}</text><text>优先完成</text></view></view></view>
+  <view class="growth card"><view><text class="menu-title">令令成长</text><text class="sub">Lv.{{lingling.level}} {{lingling.stageName}}</text></view><view class="growth-num">{{lingling.xp}} XP</view></view>
+  <view class="section-head"><text class="section-title">偏好与设置</text></view><view class="settings card"><view><view><text class="menu-title">每日提醒</text><text class="sub">按建议食用日期提醒优先食材</text></view><switch checked="{{reminders}}" color="#789176" bindchange="toggle"/></view><view bindtap="about"><text class="menu-title">产品说明</text><text class="arrow">›</text></view></view>
+  <view class="section-head"><text class="section-title">数据</text></view><view class="settings card"><view class="danger" bindtap="reset"><view><text class="menu-title">重置本地数据</text><text class="sub">清空食材、成长与兑换记录</text></view><text class="arrow">›</text></view></view>
+  <text class="footer">FIRST BITE · 珍惜食物，从先吃开始</text>
+  <view wx:if="{{showEditor}}" class="sheet-mask" catchtap="closeEditor"><view class="profile-sheet" catchtap="noop"><view class="sheet-handle"></view><text class="sheet-title">编辑个人资料</text><text class="sheet-sub">头像与昵称仅用于先吃小程序内展示</text><button class="sheet-avatar" open-type="chooseAvatar" bindchooseavatar="chooseDraftAvatar"><image wx:if="{{draftAvatar}}" src="{{draftAvatar}}" mode="aspectFill"/><text wx:else>{{draftInitial}}</text><view class="camera">＋</view></button><view class="nickname-field"><text class="field-label">昵称</text><input type="nickname" value="{{draftNickname}}" maxlength="16" placeholder="请输入昵称" bindinput="nicknameInput"/></view><button class="save-profile" bindtap="saveProfile">保存资料</button><button class="cancel-profile" bindtap="closeEditor">暂不修改</button></view></view>
+</view>

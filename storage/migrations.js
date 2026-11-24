@@ -1,11 +1,12 @@
-const CURRENT_VERSION = 2
+const CURRENT_VERSION = 3
 function migrate(state) {
   const next = Object.assign({ version: CURRENT_VERSION, ingredients: [], consumptions: [], transactions: [], events: [], userOutfits: [] }, state || {})
   if ((next.version || 1) < 2 && next.lingling) {
     next.lingling.equippedOutfits = {}
     ;(next.userOutfits || []).forEach(item => { item.equipped = false })
   }
-  next.profile = Object.assign({ nickname: '惜食新朋友', avatarUrl: '' }, next.profile || {})
+  if ((next.version || 1) < 3 && next.lingling) next.lingling.currentExpression = 'happy-face'
+  next.profile = Object.assign({ nickname: '惜食新朋友', avatarUrl: '', loggedIn: false }, next.profile || {})
   next.version = CURRENT_VERSION
   return next
 }
