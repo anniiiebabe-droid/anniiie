@@ -1,5 +1,5 @@
 <view class="ingredient-card" bindtap="detail">
-  <view class="food-icon {{item.category}}">{{item.shortName}}</view>
+  <view class="food-icon {{item.categoryClass}}">{{item.shortName}}</view>
   <view class="info"><view class="name-row"><text class="name">{{item.name}}</text><text class="tag {{item.tone}}">{{item.priority}}</text></view><text class="sub">剩余 {{item.remainingQuantity}}{{item.unit}} · {{item.priorityUseDate}}</text><text class="status">{{item.statusText}}</text></view>
   <button class="use" catchtap="consume">使用</button>
 </view>
