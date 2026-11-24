@@ -1,0 +1,1 @@
+<view class="xp-wrap"><view class="xp-meta"><text>{{label}}</text><text>{{value}}%</text></view><view class="track"><view class="fill" style="width: {{value}}%"></view></view></view>

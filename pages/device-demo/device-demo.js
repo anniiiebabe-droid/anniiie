@@ -1,0 +1,2 @@
+const service=require('../../services/device-service');const {friendly}=require('../../utils/date')
+Page({data:{items:[],date:'',synced:''},onShow(){this.load()},load(){service.getDisplayData().then(d=>this.setData({items:d.items,date:friendly(new Date()),synced:new Date(d.syncedAt).toLocaleTimeString()}))},sync(){service.syncToDevice().then(()=>{this.load();wx.showToast({title:'已同步库存',icon:'success'})})}})

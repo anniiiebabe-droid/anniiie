@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/fridge/fridge",
+    "pages/lingling/lingling",
+    "pages/profile/profile",
+    "pages/add-ingredient/add-ingredient",
+    "pages/ingredient-detail/ingredient-detail",
+    "pages/wardrobe/wardrobe",
+    "pages/shop/shop",
+    "pages/collection/collection",
+    "pages/achievements/achievements",
+    "pages/weekly-report/weekly-report",
+    "pages/device-demo/device-demo"
+  ],
+  "window": {
+    "navigationBarTitleText": "先吃 FIRST BITE",
+    "navigationBarBackgroundColor": "#F7F3E9",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F7F3E9",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#827C70",
+    "selectedColor": "#61785F",
+    "backgroundColor": "#FFFCF5",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页" },
+      { "pagePath": "pages/fridge/fridge", "text": "冰箱" },
+      { "pagePath": "pages/lingling/lingling", "text": "令令" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

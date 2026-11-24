@@ -1,0 +1,2 @@
+const list=require('../../data/achievements');const dm=require('../../storage/data-manager')
+Page({data:{items:[]},onShow(){const s=dm.getState(),done=s.consumptions.filter(c=>c.completed&&!c.reversed).length,bought=s.userOutfits.some(o=>o.owned&&o.outfitId!=='onion-hat');this.setData({items:list.map(a=>Object.assign({},a,{unlocked:a.id==='first-add'?s.ingredients.length>0:a.id==='first-finish'?done>0:a.id==='five-finish'?done>=5:bought}))})}})

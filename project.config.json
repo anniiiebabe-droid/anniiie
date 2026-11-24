@@ -1,0 +1,15 @@
+{
+  "description": "先吃 FIRST BITE 微信小程序课程展示项目",
+  "packOptions": { "ignore": ["tests/"] },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "appid": "touristappid",
+  "projectname": "first-bite",
+  "miniprogramRoot": "./"
+}

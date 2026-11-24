@@ -1,0 +1,8 @@
+<view class="page">
+  <view class="fridge-head"><view><text class="title">冰箱里有什么</text><text class="subtitle">按建议使用日期为你排好顺序</text></view><button class="mini-add" bindtap="add">＋ 添加</button></view>
+  <scroll-view scroll-x class="filters" show-scrollbar="false"><view class="filter-row"><view wx:for="{{categories}}" wx:key="*this" class="filter {{selected===item?'active':''}}" data-value="{{item}}" bindtap="choose">{{item}}</view></view></scroll-view>
+  <view class="notice">“建议日期”仅用于管理顺序；超过日期请检查食材状态，系统不判断食品安全。</view>
+  <view wx:if="{{filtered.length}}"><ingredient-card wx:for="{{filtered}}" wx:key="id" item="{{item}}" binddetail="detail" bindconsume="consume" /></view>
+  <view wx:else class="empty card"><text class="empty-icon">🧊</text><text>{{selected==='全部'?'还没有食材，点击右上角添加':'这个分类暂时是空的'}}</text></view>
+</view>
+<reward-popup visible="{{rewardVisible}}" reward="{{reward}}" bindclose="closeReward" />

@@ -1,0 +1,16 @@
+<view class="page home">
+  <view class="topbar"><view><text class="eyebrow">FIRST BITE</text><text class="logo">先吃</text></view><view class="date-badge">{{date}}</view></view>
+  <view class="hero card">
+    <view class="hero-copy"><text class="hello">{{greeting}}</text><text class="headline">今天先吃什么？</text><text class="hint">令令已经帮你排好优先顺序啦</text></view>
+    <lingling-character size="small" equipped="{{lingling.equippedOutfits}}" expression="{{lingling.currentExpression}}" bindtap="lingling" />
+  </view>
+  <view class="section-head"><text class="section-title">今日优先</text><view class="device-link" bindtap="device">▣ 墨水屏</view></view>
+  <view wx:if="{{priorityItems.length}}"><ingredient-card wx:for="{{priorityItems}}" wx:key="id" item="{{item}}" binddetail="detail" bindconsume="consume" /></view>
+  <view wx:else class="empty card"><text class="empty-icon">🧺</text><text>冰箱还是空的，先记录一份食材吧</text></view>
+  <button class="quick-add" bindtap="add"><text class="plus">＋</text><view><text class="quick-title">快速添加食材</text><text class="quick-sub">拍下生活里值得好好吃完的每一份</text></view><text class="arrow">›</text></button>
+  <view class="section-head"><text class="section-title">今日食谱</text></view>
+  <view wx:if="{{recipe}}" class="recipe card" bindtap="goRecipe"><view class="recipe-emoji">{{recipe.emoji}}</view><view class="grow"><text class="recipe-name">{{recipe.name}}</text><text class="recipe-meta">约 {{recipe.minutes}} 分钟 · 匹配 {{recipe.available.length}} 种库存</text><text wx:if="{{recipe.missing.length}}" class="missing">还缺：{{recipe.missingText}}</text><text wx:else class="ready">库存齐全，可以开动</text></view><text class="arrow">›</text></view>
+  <view class="section-head"><text class="section-title">今日成长</text></view>
+  <view class="growth card" bindtap="lingling"><view class="growth-top"><text>Lv.{{lingling.level}} {{lingling.stageName}}</text><text class="stars">⭐ {{lingling.points}}</text></view><xp-progress value="{{lingling.progress}}" label="{{lingling.isMax ? '已满级' : lingling.xp + ' / ' + lingling.nextXp + ' XP'}}"/><text class="task">今日任务：优先用完一份食材，令令会获得成长养料</text></view>
+</view>
+<reward-popup visible="{{rewardVisible}}" reward="{{reward}}" bindclose="closeReward" />

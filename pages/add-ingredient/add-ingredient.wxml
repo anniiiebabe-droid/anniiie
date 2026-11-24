@@ -1,0 +1,12 @@
+<view class="page form-page">
+  <view class="form-intro"><text class="intro-title">{{isEdit?'更新食材信息':'把食材放进冰箱'}}</text><text>建议日期由你设置，令令会依此安排优先顺序。</text></view>
+  <view class="form-card card">
+    <view class="field"><text class="label">食材名称 <text class="required">*</text></text><input value="{{form.name}}" placeholder="例如：洋葱" data-key="name" bindinput="input" maxlength="20" /></view>
+    <view class="two-col"><view class="field grow"><text class="label">数量 <text class="required">*</text></text><input type="digit" value="{{form.quantity}}" placeholder="0" data-key="quantity" bindinput="input" /></view><view class="field unit"><text class="label">单位 <text class="required">*</text></text><picker range="{{units}}" bindchange="pick" data-key="unit"><view class="picker">{{form.unit}} ›</view></picker></view></view>
+    <view class="field"><text class="label">建议优先使用日期 <text class="required">*</text></text><picker mode="date" value="{{form.priorityUseDate}}" start="{{today}}" bindchange="date" data-key="priorityUseDate"><view class="picker {{form.priorityUseDate?'':'placeholder'}}">{{form.priorityUseDate||'请选择日期'}} ›</view></picker></view>
+    <view class="field"><text class="label">购买日期</text><picker mode="date" value="{{form.purchaseDate}}" end="{{today}}" bindchange="date" data-key="purchaseDate"><view class="picker {{form.purchaseDate?'':'placeholder'}}">{{form.purchaseDate||'选填'}} ›</view></picker></view>
+    <view class="two-col"><view class="field grow"><text class="label">分类</text><picker range="{{categories}}" bindchange="pick" data-key="category"><view class="picker">{{form.category}} ›</view></picker></view><view class="field grow"><text class="label">储存位置</text><picker range="{{locations}}" bindchange="pick" data-key="storageLocation"><view class="picker">{{form.storageLocation}} ›</view></picker></view></view>
+    <view class="field"><text class="label">储存备注</text><textarea value="{{form.note}}" placeholder="例如：已切开，用保鲜盒密封" data-key="note" bindinput="input" maxlength="100" /></view>
+  </view>
+  <button class="btn btn-primary save" bindtap="save">{{isEdit?'保存修改':'添加到冰箱'}}</button>
+</view>

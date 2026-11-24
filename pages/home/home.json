@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "lingling-character": "/components/lingling-character/lingling-character",
+    "ingredient-card": "/components/ingredient-card/ingredient-card",
+    "xp-progress": "/components/xp-progress/xp-progress",
+    "reward-popup": "/components/reward-popup/reward-popup"
+  }
+}

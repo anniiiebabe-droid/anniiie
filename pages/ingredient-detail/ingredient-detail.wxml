@@ -1,0 +1,8 @@
+<view wx:if="{{item}}" class="page">
+ <view class="detail-hero card"><view class="big-icon">{{item.shortName}}</view><text class="name">{{item.name}}</text><text class="pill {{item.tone}}">{{item.priority}}</text><view class="quantity">剩余 <text class="quantity-strong">{{item.remainingQuantity}}</text> / {{item.quantity}}{{item.unit}}</view><text class="status">{{item.statusText}}</text></view>
+ <view class="actions"><button class="btn btn-soft" bindtap="partial" disabled="{{item.status!=='active'}}">部分使用</button><button class="btn btn-primary" bindtap="all" disabled="{{item.status!=='active'}}">全部用完</button></view>
+ <view class="section-head"><text class="section-title">食材信息</text><text class="section-link" bindtap="edit">编辑</text></view>
+ <view class="info card"><view><text>建议日期</text><text>{{item.priorityUseDate}}</text></view><view><text>购买日期</text><text>{{item.purchaseDate||'未填写'}}</text></view><view><text>分类</text><text>{{item.category}}</text></view><view><text>储存位置</text><text>{{item.storageLocation}}</text></view><view><text>储存备注</text><text>{{item.note||'暂无备注'}}</text></view></view>
+ <view class="section-head"><text class="section-title">使用记录</text></view><view wx:if="{{records.length}}" class="info card"><view wx:for="{{records}}" wx:key="id"><text>使用 {{item.quantity}}{{item.unit}}</text><text>{{item.reversed?'已撤销':item.time}}</text><text wx:if="{{!item.reversed}}" class="undo" data-id="{{item.id}}" bindtap="undo">撤销</text></view></view><view wx:else class="empty card">还没有使用记录</view>
+ <button class="delete" bindtap="remove">删除这份食材</button>
+</view><reward-popup visible="{{rewardVisible}}" reward="{{reward}}" bindclose="closeReward" />

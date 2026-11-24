@@ -1,0 +1,4 @@
+{
+  "desc": "先吃页面索引",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

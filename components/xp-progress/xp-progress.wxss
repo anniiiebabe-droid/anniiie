@@ -1,0 +1,1 @@
+.xp-meta { display:flex; justify-content:space-between; color:#6f756a; font-size:23rpx; margin-bottom:10rpx; }.track{height:18rpx;border-radius:20rpx;background:#e7e4da;overflow:hidden}.fill{height:100%;border-radius:20rpx;background:linear-gradient(90deg,#8ba086,#f0c66b);transition:width .3s}
