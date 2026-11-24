@@ -5,7 +5,11 @@ function migrate(state) {
     next.lingling.equippedOutfits = {}
     ;(next.userOutfits || []).forEach(item => { item.equipped = false })
   }
-  if ((next.version || 1) < 3 && next.lingling) next.lingling.currentExpression = 'happy-face'
+  if ((next.version || 1) < 3 && next.lingling) {
+    next.lingling.currentExpression = 'happy-face'
+    if (next.lingling.equippedOutfits && next.lingling.equippedOutfits.hat === 'onion-hat') delete next.lingling.equippedOutfits.hat
+    ;(next.userOutfits || []).forEach(item => { if (item.outfitId === 'onion-hat') item.equipped = false })
+  }
   next.profile = Object.assign({ nickname: '惜食新朋友', avatarUrl: '', loggedIn: false }, next.profile || {})
   next.version = CURRENT_VERSION
   return next
